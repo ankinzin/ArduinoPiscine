@@ -16,7 +16,7 @@ int myDelay() {
 	while (x < 1000)
 	{
 		x++;
-		delay(1);
+		delay(50);
 		if (digitalRead(2)) {
 			return (0);
 		}
@@ -40,19 +40,14 @@ void loop() {
 		digitalWrite(3, HIGH);
 		digitalWrite(4, HIGH);
 	//	delay(1000);
-		if (checkState()) {
-			result = 0;
-		}
-		if (!myDelay()) {
+		if (checkState() || !myDelay())
+		{
 			result = 0;
 		}
 		digitalWrite(3, LOW);
 		digitalWrite(4, LOW);
-		if (!myDelay()) {
-			result = 0;
-		}
 	//	delay(1000);
-		if (checkState()) {
+		if (checkState() || !myDelay()) {
 			result = 0;
 		}
 	}
