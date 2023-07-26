@@ -1,0 +1,47 @@
+void setup () {
+	pinMode(2, INPUT);
+	pinMode(3, OUTPUT);
+	pinMode(4, OUTPUT);
+	pinMode(5, OUTPUT);
+}
+
+int myDelay() {
+	int x = 0;
+	while (x < 1000 && !result)
+	{
+		x++;
+		if (digitalRead(2)) {
+			return (1);
+		}
+		delay(1);
+	}
+	return (0);
+}
+
+int checkState() {
+	return (digitalRead(2));
+}
+
+void loop() {
+	int result = 0;
+
+	while (!result) {
+		digitalWrite(5, HIGH);
+		digitalWrite(3, LOW);
+		digitalWrite(4, LOW);
+		result = checkState();
+	}
+
+	while(result) {
+		digitalWrite(5, LOW);
+		digitalWrite(3, HIGH);
+		digitalWrite(4, HIGH);
+		result = myDelay();
+		if (result) {
+			continue;
+		}
+		digitalWrite(3, LOW);
+		digitalWrite(4, LOW);
+		result = myDelay();
+	}
+}
