@@ -1,3 +1,4 @@
+//Version with delay
 int result = 0;
 unsigned long previousMillis = 0;
 const long interval = 100;  // Read input every 100 milliseconds
