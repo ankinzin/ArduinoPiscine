@@ -1,7 +1,9 @@
 int result = 0;
+unsigned long previousMillis = 0;
+const long interval = 100;  // Read input every 100 milliseconds
 
 void setup () {
-	pinMode(2, INPUT);
+	pinMode(2, INPUT_PULLUP);
 	pinMode(3, OUTPUT);
 	pinMode(4, OUTPUT);
 	pinMode(5, OUTPUT);
@@ -26,12 +28,13 @@ int myDelay() {
 
 void loop() {
 	int x = 0;
+	unsigned long currentMillis = millis();
 
 	while (!result) {
 		digitalWrite(5, HIGH);
 		digitalWrite(3, LOW);
 		digitalWrite(4, LOW);
-		if (digitalRead(2) == LOW) {
+		if (digitalRead(2) == HIGHT) {
 			result = 1;
 		}
 	}
@@ -49,7 +52,7 @@ void loop() {
 		}
 		digitalWrite(3, LOW);
 		digitalWrite(4, LOW);
-		while(x < 1000) {
+		while(x < 2000) {
 			delay (100);
 			x += 100;
 			if (digitalRead(2) == LOW) {
