@@ -5,6 +5,10 @@ void setup () {
 	pinMode(5, OUTPUT);
 }
 
+int checkState() {
+	return (digitalRead(2));
+}
+
 int myDelay() {
 	int x = 0;
 	while (x < 1000 && !result)
@@ -18,10 +22,6 @@ int myDelay() {
 	return (0);
 }
 
-int checkState() {
-	return (digitalRead(2));
-}
-
 void loop() {
 	int result = 0;
 
@@ -29,7 +29,9 @@ void loop() {
 		digitalWrite(5, HIGH);
 		digitalWrite(3, LOW);
 		digitalWrite(4, LOW);
-		result = checkState();
+		if (checkState()) {
+			result = ~result;
+		}
 	}
 
 	while(result) {
