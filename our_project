@@ -1,49 +1,104 @@
-void setup () {
-	pinMode(2, INPUT);
-	pinMode(3, OUTPUT);
-	pinMode(4, OUTPUT);
-	pinMode(5, OUTPUT);
-}
+const int buttonPin = 2; // Replace with the pin connected to your button
+const int ledGreen = 5;   // Replace with the pin you want to change the state
+const int ledYellow = 4;
+const int ledRed = 3;
 
-int checkState() {
-	return (digitalRead(2));
-}
+int valueToIncrease = 0;
+bool buttonState = HIGH;
+bool lastButtonState = HIGH;
 
-int myDelay() {
-	int x = 0;
-	while (x < 1000 && !result)
-	{
-		x++;
-		if (digitalRead(2)) {
-			return (0);
-		}
-		delay(1);
-	}
-	return (1);
+void setup() {
+  pinMode(buttonPin, INPUT_PULLUP);
+  pinMode(ledGreen, OUTPUT);
+    pinMode(ledYellow, OUTPUT);
+      pinMode(ledRed, OUTPUT);
+  Serial.begin(9600);
 }
 
 void loop() {
-	int result = 0;
+  // Read the button state
+  buttonState = digitalRead(buttonPin);
 
-	while (!result) {
-		digitalWrite(5, HIGH);
-		digitalWrite(3, LOW);
-		digitalWrite(4, LOW);
-		if (checkState()) {
-			result = ~result;
-		}
-	}
-
-	while(result) {
-		digitalWrite(5, LOW);
-		digitalWrite(3, HIGH);
-		digitalWrite(4, HIGH);
-		result = myDelay();
-		if (result) {
-			continue;
-		}
-		digitalWrite(3, LOW);
-		digitalWrite(4, LOW);
-		result = myDelay();
-	}
+  // Check if the button is pressed
+  if (buttonState == LOW && lastButtonState == HIGH) {
+    // Increment the value by one
+    valueToIncrease++;
+  }
+  lastButtonState = buttonState;
+//
+//  if(valueToIncrease == 0){
+//    digitalWrite(ledGreen, HIGH);
+//  }
+//  else if (valueToIncreace != 0){
+//    digitalWrite(ledGreen, LOW);
+//  }
+    if(valueToIncrease % 4 == 0){
+       digitalWrite(ledGreen, HIGH);
+    }
+    else if (valueToIncrease % 4 == 1){
+      digitalWrite(ledGreen,LOW);
+      digitalWrite(ledYellow,HIGH);
+      digitalWrite(ledRed, HIGH);
+      if (buttonState == LOW && lastButtonState == HIGH) {
+    // Increment the value by one
+    valueToIncrease++;
+  }
+      delay(1000);
+      digitalWrite(ledYellow,LOW);
+      digitalWrite(ledRed, LOW);
+      if (buttonState == LOW && lastButtonState == HIGH) {
+    // Increment the value by one
+    valueToIncrease++;
+  }
+      delay(1000);
+    }
+    else if (valueToIncrease % 4 == 2){
+          digitalWrite(ledGreen,LOW);
+      digitalWrite(ledYellow,HIGH);
+      digitalWrite(ledRed, HIGH);
+      if (buttonState == LOW && lastButtonState == HIGH) {
+    // Increment the value by one
+    valueToIncrease++;
+  }
+      delay(2000);
+      digitalWrite(ledYellow,LOW);
+      digitalWrite(ledRed, LOW);
+      if (buttonState == LOW && lastButtonState == HIGH) {
+    // Increment the value by one
+    valueToIncrease++;
+  }
+      delay(2000);
+    }
+    else if(valueToIncrease % 4 == 3){
+          digitalWrite(ledGreen,LOW);
+      digitalWrite(ledYellow,HIGH);
+      digitalWrite(ledRed, HIGH);
+      if (buttonState == LOW && lastButtonState == HIGH) {
+    // Increment the value by one
+    valueToIncrease++;
+  }
+      delay(500);
+      digitalWrite(ledYellow,LOW);
+      digitalWrite(ledRed, HIGH);
+      if (buttonState == LOW && lastButtonState == HIGH) {
+    // Increment the value by one
+    valueToIncrease++;
+  }
+      delay(500);
+      digitalWrite(ledYellow,HIGH);
+      digitalWrite(ledRed, HIGH);
+      if (buttonState == LOW && lastButtonState == HIGH) {
+    // Increment the value by one
+    valueToIncrease++;
+    delay(500);
+      digitalWrite(ledYellow,LOW);
+      digitalWrite(ledRed, LOW);
+      if (buttonState == LOW && lastButtonState == HIGH) {
+    // Increment the value by one
+    valueToIncrease++;
+    }
+    }
+  
+  delay(50); // A small delay to debounce the button
+}
 }
