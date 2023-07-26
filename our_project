@@ -31,7 +31,7 @@ void loop() {
 		digitalWrite(5, HIGH);
 		digitalWrite(3, LOW);
 		digitalWrite(4, LOW);
-		if (digitalRead(2) == HIGH) {
+		if (digitalRead(2) == LOW) {
 			result = 1;
 		}
 	}
@@ -43,7 +43,7 @@ void loop() {
 		while(x < 1000) {
 			delay (100);
 			x += 100;
-			if (digitalRead(2) == HIGH) {
+			if (digitalRead(2) == LOW) {
 				result = 0;
 			}
 		}
@@ -52,7 +52,7 @@ void loop() {
 		while(x < 1000) {
 			delay (100);
 			x += 100;
-			if (digitalRead(2) == HIGH) {
+			if (digitalRead(2) == LOW) {
 				result = 0;
 			}
 		}
