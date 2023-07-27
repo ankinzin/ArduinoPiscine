@@ -1,3 +1,5 @@
+ <img src="https://camo.githubusercontent.com/a9e049ade1147226016feb1ab0024b7e09cf5e6ce7921aa9e7326942f98c71dd/687474703a2f2f636f6e74656e742e61726475696e6f2e63632f6272616e642f61726475696e6f2d636f6c6f722e737667" width="500" height="450" alt="Image Preview">
+
 A piece of code meant to be compiled and uploaded to Arduino UNO R3. 
 
 By default the led is lighting continuous green.
