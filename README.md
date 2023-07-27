@@ -1,5 +1,12 @@
- <img src="https://camo.githubusercontent.com/a9e049ade1147226016feb1ab0024b7e09cf5e6ce7921aa9e7326942f98c71dd/687474703a2f2f636f6e74656e742e61726475696e6f2e63632f6272616e642f61726475696e6f2d636f6c6f722e737667" width="500" height="450" alt="Image Preview">
-
+<p align="center">
+	<img src="http://content.arduino.cc/brand/arduino-color.svg" width="50%" />
+</p>
+<h4>Arduino is an open-source physical computing platform based on a simple I/O
+board and a development environment that implements the Processing/Wiring
+language. Arduino can be used to develop stand-alone interactive objects or
+can be connected to software on your computer (e.g. Flash, Processing and MaxMSP).
+The boards can be assembled by hand or purchased preassembled; the open-source
+IDE can be downloaded for free at [https://arduino.cc](https://www.arduino.cc/en/Main/Software)</h4>
 A piece of code meant to be compiled and uploaded to Arduino UNO R3. 
 
 By default the led is lighting continuous green.
