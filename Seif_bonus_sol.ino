@@ -33,7 +33,7 @@ void loop() {
 			digitalWrite(blueLed, LOW);
 			interval ++;
 		} 
-		if (currentTime - previousTime >= 2000 && interval % 2) {
+		if (currentTime - previousTime >= 500 && interval % 2) {
 			previousTime = currentTime;
 			digitalWrite(blueLed, !digitalRead(blueLed));
 			digitalWrite(redLed, LOW);
