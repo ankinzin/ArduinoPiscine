@@ -20,6 +20,7 @@ void loop() {
 	if (digitalRead(button) == HIGH)
 	{
 		flashing = !flashing;
+		delay(150);
 	}
 
 	if (flashing)
