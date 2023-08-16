@@ -2,6 +2,7 @@
 
 
 Servo myservo;  // create servo object to control a servo
+Servo myservoDuo;
 
 int right;    // variable to read the value from the analog pin
 int center;
@@ -14,9 +15,10 @@ int potpin_left = 2;
 
 void setup() {
   myservo.attach(9);  // attaches the servo on pin 9 to the servo object
-  myservo.attach(10);
+  myservoDuo.attach(10);
   Serial.begin(9600);
-  myservo.write(servo);
+  myservo.write(90);
+  myservoDuo.write(90);
   delay(3000);
 }
 
@@ -25,14 +27,8 @@ void loop() {
   center = analogRead(potpin_center);
   left = analogRead(potpin_left);
   /*
-   * scale it to use it with the servo (value between 0 and 180)
-   * the values correspond with 0 degrees and 180 degrees
    * the darker the lower the registered value
-   * thinking of a proportion to determine the direction of the servo
-  */
-//  right = map(right, 0, 1023, 0, 180);
-//  center = map(center, 0, 1023, 0, 180);
-//  left = map(left, 0, 1023, 0, 180);   
+  */ 
   /*printing out the values*/
   Serial.println("A0 right=");
   Serial.println(right);
@@ -55,5 +51,6 @@ void loop() {
     servo = servo + 10;
   }
   myservo.write(servo);
+  myservoDuo.write(servo);
   delay(500);                           // waits for the servo to get there
 }
