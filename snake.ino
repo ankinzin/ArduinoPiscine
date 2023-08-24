@@ -92,10 +92,16 @@ void snakeGameAnimation() {
 }
 
 bool checkCollision() {
-  // Check if the snake hits the wall
-  if (snakeX[0] < 0 || snakeX[0] >= 8 || snakeY[0] < 0 || snakeY[0] >= 8) {
-    return true;  // Collision with the wall
+  // Check if the snake hits itself
+  for (int i = 1; i < snakeSize; i++) {
+    if (snakeX[0] == snakeX[i] && snakeY[0] == snakeY[i]) {
+      return true;  // Collision with itself
+    }
   }
+
+  return false;  // No collision
+}
+
 
   // Check if the snake hits itself
   for (int i = 1; i < snakeSize; i++) {
@@ -121,8 +127,15 @@ void moveSnake() {
 }
 
 void growSnake() {
-  // Implement logic to increase the size of the snake
-  // For example, add new segment to the end of the snake
+  int lastSegmentIndex = snakeSize - 1;
+
+  int newSegmentX = snakeX[lastSegmentIndex] - dirX;
+  int newSegmentY = snakeY[lastSegmentIndex] - dirY;
+
+  snakeX[lastSegmentIndex + 1] = newSegmentX;
+  snakeY[lastSegmentIndex + 1] = newSegmentY;
+
+  snakeSize++;
 }
 
 void displaySnake() {
