@@ -26,8 +26,8 @@ int dirX = 1, dirY = 0;
 
 
 #ifndef STASSID
-#define STASSID "42Wolfsburg_FabLab"
-#define STAPSK "0nly5ky15theL1m17"
+#define STASSID "123456"
+#define STAPSK "123456lol"
 #endif
 
 const char* ssid = STASSID;
