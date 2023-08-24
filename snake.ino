@@ -9,21 +9,13 @@
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
-void colorWipe(uint32_t c, uint8_t wait) {
-  for(uint16_t i=0; i<strip.numPixels(); i++) {
-      strip.setPixelColor(i, c);
-      strip.show();
-      delay(wait);
-  }
-}
-
 const int snakeSize = 4;
 int snakeX[snakeSize] = {0, 0, 0, 0};
 int snakeY[snakeSize] = {0, 1, 2, 3};
 int foodX, foodY;
-int dirX = 1, dirY = 0; 
+int dirX = 1, dirY = 0;
 
-
+bool gameRunning = true;
 
 #ifndef STASSID
 #define STASSID "123456"
@@ -40,8 +32,9 @@ void handleRoot() {
 }
 
 void handleSnakeGame() {
-  snakeGameAnimation();
-  server.send(200, "text/plain", "Snake game animation started.");
+  gameRunning = true;
+  spawnFood();
+  server.send(200, "text/plain", "Snake game started.");
 }
 
 void setup(void) {
@@ -74,6 +67,11 @@ void setup(void) {
 
 void loop(void) {
   server.handleClient();
+
+  if (gameRunning) {
+    snakeGameAnimation();
+    delay(200);
+  }
 }
 
 void spawnFood() {
@@ -82,11 +80,31 @@ void spawnFood() {
 }
 
 void snakeGameAnimation() {
-  for (int i = 0; i < 10; i++) {
-    moveSnake();
-    displaySnake();
-    delay(200);
+  moveSnake();
+  if (checkCollision()) {
+    gameRunning = false;  // Game over
   }
+  if (snakeX[0] == foodX && snakeY[0] == foodY) {
+    spawnFood();
+    growSnake();
+  }
+  displaySnake();
+}
+
+bool checkCollision() {
+  // Check if the snake hits the wall
+  if (snakeX[0] < 0 || snakeX[0] >= 8 || snakeY[0] < 0 || snakeY[0] >= 8) {
+    return true;  // Collision with the wall
+  }
+
+  // Check if the snake hits itself
+  for (int i = 1; i < snakeSize; i++) {
+    if (snakeX[0] == snakeX[i] && snakeY[0] == snakeY[i]) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 void moveSnake() {
@@ -100,6 +118,11 @@ void moveSnake() {
 
   snakeX[0] = newHeadX;
   snakeY[0] = newHeadY;
+}
+
+void growSnake() {
+  // Implement logic to increase the size of the snake
+  // For example, add new segment to the end of the snake
 }
 
 void displaySnake() {
