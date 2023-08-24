@@ -102,17 +102,6 @@ bool checkCollision() {
   return false;  // No collision
 }
 
-
-  // Check if the snake hits itself
-  for (int i = 1; i < snakeSize; i++) {
-    if (snakeX[0] == snakeX[i] && snakeY[0] == snakeY[i]) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
 void moveSnake() {
   int newHeadX = snakeX[0] + dirX;
   int newHeadY = snakeY[0] + dirY;
