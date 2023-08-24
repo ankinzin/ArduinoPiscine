@@ -92,10 +92,9 @@ void snakeGameAnimation() {
 }
 
 bool checkCollision() {
-  // Check if the snake hits itself
   for (int i = 1; i < snakeSize; i++) {
     if (snakeX[0] == snakeX[i] && snakeY[0] == snakeY[i]) {
-      return true;  // Collision with itself
+      return true;  
     }
   }
 
@@ -116,15 +115,8 @@ void moveSnake() {
 }
 
 void growSnake() {
-  int lastSegmentIndex = snakeSize - 1;
-
-  int newSegmentX = snakeX[lastSegmentIndex] - dirX;
-  int newSegmentY = snakeY[lastSegmentIndex] - dirY;
-
-  snakeX[lastSegmentIndex + 1] = newSegmentX;
-  snakeY[lastSegmentIndex + 1] = newSegmentY;
-
-  snakeSize++;
+  // Implement logic to increase the size of the snake
+  // For example, add new segment to the end of the snake
 }
 
 void displaySnake() {
