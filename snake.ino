@@ -28,13 +28,50 @@ const char* password = STAPSK;
 ESP8266WebServer server(80);
 
 void handleRoot() {
-  server.send(200, "text/plain", "Hello from ESP8266!");
+  String html = "<!DOCTYPE html>"
+                "<html>"
+                "<head>"
+                "<style>"
+                "body { font-family: Arial, sans-serif; text-align: center; }"
+                ".btn { display: inline-block; padding: 10px 20px; font-size: 18px; margin: 10px; cursor: pointer; border: none; border-radius: 5px; color: white; }"
+                ".btn-left { background-color: #3498db; }"
+                ".btn-right { background-color: #e74c3c; }"
+                ".btn-up { background-color: #2ecc71; }"
+                ".btn-down { background-color: #f39c12; }"
+                "</style>"
+                "</head>"
+                "<body>"
+                "<h1>ESP8266 Snake Game</h1>"
+                "<a class='btn btn-left' href='/snake?dir=left'>Left</a>"
+                "<a class='btn btn-right' href='/snake?dir=right'>Right</a><br>"
+                "<a class='btn btn-up' href='/snake?dir=up'>Up</a>"
+                "<a class='btn btn-down' href='/snake?dir=down'>Down</a>"
+                "<p>Use arrow buttons to control the snake</p>"
+                "</body>"
+                "</html>";
+
+  server.send(200, "text/html", html);
 }
 
 void handleSnakeGame() {
+  String direction = server.arg("dir");
+  if (direction == "left" && dirX != 1) {
+    dirX = -1;
+    dirY = 0;
+  } else if (direction == "right" && dirX != -1) {
+    dirX = 1;
+    dirY = 0;
+  } else if (direction == "up" && dirY != 1) {
+    dirX = 0;
+    dirY = -1;
+  } else if (direction == "down" && dirY != -1) {
+    dirX = 0;
+    dirY = 1;
+  }
+
   gameRunning = true;
   spawnFood();
-  server.send(200, "text/plain", "Snake game started.");
+  server.send(200, "snake", "Snake game started.");
 }
 
 void setup(void) {
